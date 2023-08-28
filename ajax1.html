@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax-1 Text File</title>
+</head>
+<body>
+    <button id="button">Ajouter un fichier texte</button>
+
+    <!-- <div id="text"></div> -->
+    <!-- <h1>Sample2</h1> -->
+
+    <script>
+        // Créez un écouteur d'événements
+        document.getElementById('button').addEventListener('click', loadText);
+
+        function loadText() {
+            // Créez une instance de XMLHttpRequest
+            var xhr = new XMLHttpRequest();
+            
+            // Ouvrez la connexion avec la méthode GET et l'URL du fichier texte
+            xhr.open('GET', 'sample2.txt', true);
+
+            // Utilisez la méthode onload pour gérer la réponse
+            xhr.onload = function () {
+                console.log('READYSTATE: ', xhr.readyState);
+                if (this.status == 200) {
+                    document.getElementById('text').innerHTML = this.responseText;
+                } else if (this.status == 404) {
+                    document.getElementById('text').innerHTML = 'Non trouvé';
+                }
+            };
+
+            // Utilisez la méthode onerror pour gérer les erreurs de requête
+            xhr.onerror = function () {
+                console.log('Erreur de requête.');
+            };
+
+            // Utilisez la méthode send() pour envoyer la requête
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
